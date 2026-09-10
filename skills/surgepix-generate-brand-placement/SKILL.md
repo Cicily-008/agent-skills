@@ -1,7 +1,7 @@
 ---
 name: surgepix-generate-brand-placement
 description: >-
-  Generate new campaign images with Logo and/or locked copy placed on a 9-grid via SurgePix. Use when the user says "品牌落位", "品牌落位文生图", "logo落位", "把logo放到右上角", "固定文案落位", "brand placement", or wants a new scene with a brand logo and/or fixed text anchored to a corner. Language: write --prompt and --fixed-text in the user's conversation language. Output rule: show ONLY the download URL from script stdout verbatim in a code block; single image = image URL, count>1 = ZIP URL; NEVER fabricate or retype URLs. Do NOT use for event posters (surgepix-generate-poster), logo-only (surgepix-generate-logo), general 改图 (surgepix-image-edit), or cropping a finished KV to channel sizes (surgepix-generate-channel-crop-pack).
+  Generate new campaign images with Logo and/or locked copy placed on a 9-grid via SurgePix. Use when the user says "品牌落位", "品牌落位文生图", "logo落位", "把logo放到右上角", "固定文案落位", "brand placement", or wants a new scene with a brand logo and/or fixed text anchored to a corner. Language: write --prompt and --fixed-text in the user's conversation language. Output rule: show ONLY the download URL from script stdout verbatim in a code block; single image = image URL, count>1 = ZIP URL; NEVER fabricate or retype URLs. Do NOT use for event posters (surgepix-generate-poster), logo-only (surgepix-generate-logo), general 改图 (surgepix-image-edit), or cropping a finished KV to channel sizes (surgepix-channel-crop).
 ---
 
 # SurgePix Generate Brand Placement
@@ -28,7 +28,7 @@ Match the **user's conversation language** for `--prompt` and `--fixed-text` —
 | New scene + Logo / 固定文案 九宫格落位 | **surgepix-generate-poster** for 活动海报 (name / date / venue) |
 | "把 logo 放到右上角，文案放左下" | **surgepix-generate-logo** for 只做标志 / 透明底 logo |
 | 品牌落位文生图 / brand placement | **surgepix-image-edit** for 改已有图（无锁定落位） |
-| | **surgepix-generate-channel-crop-pack** for 已定稿 KV 按渠道尺寸裁切 |
+| | **surgepix-channel-crop** for 已定稿 KV 按渠道尺寸裁切 |
 
 **Do NOT use this skill** to edit an existing photo, to crop a finished KV, or to generate a standalone logo.
 

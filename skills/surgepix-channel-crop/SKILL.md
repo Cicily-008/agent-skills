@@ -1,12 +1,28 @@
 ---
-name: surgepix-generate-channel-crop-pack
+name: surgepix-channel-crop
 description: >-
-  Use when the user already has photo(s) and wants to 裁剪 / 裁切 / crop them to a platform size — including 「帮我把这三张图裁剪成小红书竖版尺寸」, 「把这几张图裁成小红书竖版」, 「裁成竖版尺寸」, 「改成小红书尺寸」, 「裁成Story/信息流/方图」, crop to Xiaohongshu/RED vertical size, 渠道裁切包, or exporting a finished KV. Works for 1–5 existing images and even a SINGLE size (not only multi-size packs). Prefer this over surgepix-generate-xhs whenever the job is crop/resize of existing photos (xhs GENERATES new 套图). Do NOT use for generating new posters/scenes or general 改图. Output: show ONLY the download URL from script stdout verbatim (one PNG or ZIP); NEVER fabricate per-image URLs.
+  Crop existing images to Xiaohongshu / Little Red Book dimensions. Use when the user says "crop this image to Xiaohongshu", "crop to Xiaohongshu dimensions", "Little Red Book", "截成小红书尺寸", "帮我把图片截成小红书尺寸", "裁剪成小红书竖版", 3:4, 1080x1440, or 渠道裁切. REQUIRED next step: run scripts/channel_crop.mjs with --reference and --size 1080x1440. NEVER bash/sips/magick/convert/identify/Pillow/ffmpeg, and NEVER "check the current image size then crop". One local file is enough. Not generate-xhs (that creates new 套图).
 ---
 
-# SurgePix Generate Channel Crop Pack
+# SurgePix Channel Crop
 
-Take a **finished** key visual (campaign KV / hero) and produce multiple platform sizes by **cover-scale + geometric center crop**. No generative model, no stretch, no padding, no redraw.
+Take a **finished** image (local path or URL) and produce platform sizes by **cover-scale + geometric center crop**. No generative model, no stretch, no padding, no redraw.
+
+## Required first action
+
+When this skill applies, the **next tool call** is the script below — not `identify`, not `sips`, not Pillow, not "check the current image size":
+
+```bash
+node "<skills-dir>/surgepix-setup/scripts/check_env.mjs"
+node "<skills-dir>/surgepix-channel-crop/scripts/channel_crop.mjs" \
+  --reference "<USER_IMAGE_PATH_OR_URL>" \
+  --size 1080x1440 \
+  --prompt "crop to Xiaohongshu size (placeholder, does not affect crop)"
+```
+
+Default size for 小红书 / Xiaohongshu / Little Red Book / 3:4: **`1080x1440`**. Do not also emit 1:1 unless the user asked. `1080x1920` is Story/开屏 only.
+
+**Hard rule:** existing photo + 截成/裁剪/裁切/crop + 小红书/Xiaohongshu → this script. Do **not** crop with bash, sips, magick, convert, identify, Pillow, ffmpeg, OpenCV, or a one-off Python script.
 
 ## Language consistency
 
@@ -31,17 +47,29 @@ Take a **finished** key visual (campaign KV / hero) and produce multiple platfor
 
 **Do NOT use this skill** to invent a new image, move a logo, or restyle a photo.
 
-**Do NOT send crop jobs to xhs.** 「小红书竖版」+ 已有图 + 裁剪/裁切/改尺寸 = this skill. 「做一套小红书笔记 / 竖版轮播」from 文案 = **surgepix-generate-xhs**.
+**Do NOT send crop jobs to xhs, and do NOT crop locally.** 「小红书尺寸」+ 已有图 + 截成/裁剪/裁切 = this skill. 「做一套小红书笔记」from 文案 = **surgepix-generate-xhs**.
 
 ## When to use
 
-- User says "裁剪成小红书竖版尺寸", "裁成小红书竖版", "裁成竖版尺寸", "改成小红书尺寸", "把这几张图裁一下"
+- User says "crop this image to Xiaohongshu", "crop to Xiaohongshu dimensions", "Little Red Book", "截成小红书尺寸", "帮我把图片截成小红书尺寸", "裁剪成小红书竖版尺寸", "裁成小红书竖版", "改成小红书尺寸"
+- User drops a local path (`.png` / `.jpg`) and asks to crop / 截成 / 裁成 小红书 / Xiaohongshu size
 - User says "渠道裁切", "渠道裁切包", "多尺寸裁切", "channel crop pack", "crop to Xiaohongshu size"
-- User attaches 1–5 existing photos and names a channel size (小红书竖版 / Story / 信息流 / 方图 / 横幅) — **one size is enough**
+- User attaches 1–5 existing photos and names a channel size (小红书 / Story / 信息流 / 方图 / 横幅) — **one size is enough**
 - User has a finished KV and wants 小红书封面 / Story / 信息流方图 / 横幅 / 头像 / 网页头图
 - User lists target `WxH` sizes (custom or from the channel table below)
 
-If the user says **小红书竖版** / **小红书竖版尺寸** without a pixel size, use `--size 1080x1440`.
+If the user says **小红书尺寸** / **小红书竖版** / **小红书竖版尺寸** without a pixel size, use `--size 1080x1440` (3:4 cover). That is **not** 1080x1920 — 9:16 / 1080x1920 is Story/开屏.
+
+## Red flags — STOP, do not crop locally
+
+| Excuse | Reality |
+|--------|---------|
+| "Let me first check the current image size then crop" | Skip identify/sips/bash crop. Run `channel_crop.mjs`. |
+| "Just crop with Pillow / bash, it's a local file" | Local crop skips the skill API. Run the script. |
+| "截成 is not 裁剪, so this skill doesn't apply" | 截成 / 裁成 / 裁剪 / 裁切 / crop are the same job. |
+| "Xiaohongshu is 3:4 or 1:1, I'll pick and crop locally" | Default is one size: `1080x1440`. Do not invent a local 1:1 crop. |
+| "小红书尺寸 means 9:16 1080x1920" | Default 小红书尺寸 is `1080x1440`. Use `1080x1920` only for Story/开屏. |
+| "One image / one size is too simple for a pack" | One `--reference` and one `--size` is a valid call. |
 
 ## Prerequisites
 
@@ -77,15 +105,23 @@ SURGEPIX_API_KEY=your-token
 SURGEPIX_BASE_URL=https://api.surgepix.ai/api
 ```
 
-Script path: `<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_crop_pack.mjs`.
+Script path: `<skills-dir>/surgepix-channel-crop/scripts/channel_crop.mjs`.
 
 ---
 
 ## Usage Examples
 
+**Local file → 小红书尺寸 (1080x1440):**
+```bash
+node "<skills-dir>/surgepix-channel-crop/scripts/channel_crop.mjs" \
+  --reference /path/to/photo.png \
+  --size 1080x1440 \
+  --prompt "截成小红书尺寸（本版不参与裁窗）"
+```
+
 **One KV → Story / square / banner (sync):**
 ```bash
-node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_crop_pack.mjs" \
+node "<skills-dir>/surgepix-channel-crop/scripts/channel_crop.mjs" \
   --reference ./campaign-kv.png \
   --size 1080x1920 --size 1080x1080 --size 1920x1080 \
   --prompt "产品和主标题尽量完整入画（本版不参与裁窗）"
@@ -95,7 +131,7 @@ node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_
 
 **Three existing photos → 小红书竖版 (1080x1440):**
 ```bash
-node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_crop_pack.mjs" \
+node "<skills-dir>/surgepix-channel-crop/scripts/channel_crop.mjs" \
   --reference ./a.png --reference ./b.png --reference ./c.png \
   --size 1080x1440 \
   --prompt "裁成小红书竖版尺寸（本版不参与裁窗）"
@@ -103,7 +139,7 @@ node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_
 
 **Remote KV, Xiaohongshu cover + feed:**
 ```bash
-node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_crop_pack.mjs" \
+node "<skills-dir>/surgepix-channel-crop/scripts/channel_crop.mjs" \
   --reference <IMAGE_URL> \
   --size 1080x1440 --size 1080x1350 \
   --prompt "Keep product and headline in frame (placeholder)"
@@ -111,7 +147,7 @@ node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_
 
 **Async:**
 ```bash
-node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_crop_pack.mjs" \
+node "<skills-dir>/surgepix-channel-crop/scripts/channel_crop.mjs" \
   --reference ./campaign-kv.png \
   --size 1080x1920 --size 1080x1080 \
   --prompt "..." \
@@ -144,7 +180,7 @@ If the user names a channel but not pixels, map from the table below. 「小红�
 ### Step 2: Run
 
 ```bash
-node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_crop_pack.mjs" \
+node "<skills-dir>/surgepix-channel-crop/scripts/channel_crop.mjs" \
   --prompt "<text>" \
   --reference <path-or-url> [--reference ...] \
   --size <WxH> [--size ...] \
@@ -175,7 +211,7 @@ node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_
 
 | Channel | `--size` |
 |---------|----------|
-| 小红书竖版 / 小红书封面（用户只说竖版尺寸时用这个） | `1080x1440` |
+| 小红书尺寸 / 小红书竖版 / 小红书封面（用户只说小红书尺寸时用这个） | `1080x1440` |
 | Story / 开屏 | `1080x1920` |
 | 信息流方图 | `1080x1080` |
 | 信息流竖图 | `1080x1350` |

@@ -30,7 +30,7 @@ The SurgePix Agent Skills give AI agents (Claude, Codex, Cursor, Gemini, OpenCla
 | `surgepix-generate-presentation` | "generate ppt", "生成PPT" | Generate presentation → PPTX |
 | `surgepix-generate-logo` | "generate logo", "生成logo", "品牌logo" | Brand logo → PNG (transparent by default) |
 | `surgepix-generate-brand-placement` | "品牌落位", "logo落位", "固定文案落位", "brand placement" | New scene + Logo / locked copy on a 9-grid → PNG/ZIP |
-| `surgepix-generate-channel-crop-pack` | "裁剪成小红书竖版尺寸", "把这几张图裁成竖版", "渠道裁切", "channel crop pack" | Existing photos → cover + center-crop to channel size(s) (PNG/ZIP, no generative model) |
+| `surgepix-channel-crop` | "crop this image to Xiaohongshu", "截成小红书尺寸", "裁剪成小红书竖版尺寸", "Little Red Book", "渠道裁切" | Existing photos → cover + center-crop (PNG/ZIP; never bash/Pillow) |
 | `surgepix-generate-storyboard` | "分镜头", "故事板", "storyboard", "分镜剧本" | Multi-shot storyboard → single PNG |
 | `surgepix-image-edit` | "图片编辑", "改图", "重绘" (NOT 超现实主义风格 / 极简诗意风格) | General edit from references + prompt → PNG |
 | `surgepix-generate-photo-poetic-editorial` | "极简诗意风格", "极简线条", "视觉记忆面板", "改成极简诗意", "poetic editorial" | Photo reference → **ivory abstract panel only** (no source photo in the output) PNG |
@@ -41,11 +41,11 @@ The SurgePix Agent Skills give AI agents (Claude, Codex, Cursor, Gemini, OpenCla
 | `surgepix-ppt-translate` | "translate ppt", "翻译PPT", "PPT翻译" | Translate PPT/PPTX → translated file URL |
 | `surgepix-query-task` | "check task", "poll task", "查任务" | Query/poll async task status |
 
-> **xhs vs crop vs illustrations:** If the user only says「配图」, ask whether they need 小红书竖版套图 or 公众号/博客横版插图. If they already have photos and say「裁剪成小红书竖版尺寸」/「把这三张图裁成竖版」→ `surgepix-generate-channel-crop-pack` (do **not** use `surgepix-generate-xhs` — that generates new 套图).
+> **xhs vs crop vs illustrations:** If the user only says「配图」, ask whether they need 小红书竖版套图 or 公众号/博客横版插图. If they already have a photo and say「截成小红书尺寸」/「裁剪成小红书竖版尺寸」/「crop this image to Xiaohongshu」→ `surgepix-channel-crop` (do **not** use Pillow, and do **not** use `surgepix-generate-xhs` — that generates new 套图). Host projects should keep the crop routing in `CLAUDE.md` so coding agents do not fall back to bash/Pillow.
 >
 > **Photo → illustration:** 「帮我把这张图改成超现实主义风格」→ `surgepix-generate-restaged-cinematic` (conceptual restage: metaphor + color-field set + surreal device — **not** flatten the backdrop). 「改成极简诗意风格」/「极简线条」/「视觉记忆面板」→ `surgepix-generate-photo-poetic-editorial` (**ivory abstract panel only** — **not** a photo-plus-panel diptych, **not** a full-frame restyle). If the user only says「把这张照片做成插画」without style, ask.
 >
-> **Brand placement vs crop pack:** 「把 logo 放到右上角、生成新海报」→ `surgepix-generate-brand-placement` (text-to-image + 9-grid anchors). 「这张 KV 裁成小红书/Story/信息流尺寸」or「把这三张图裁剪成小红书竖版尺寸」→ `surgepix-generate-channel-crop-pack` (cover + center crop, no redraw). Do **not** use `surgepix-image-edit` or `surgepix-generate-poster` for those.
+> **Brand placement vs crop pack:** 「把 logo 放到右上角、生成新海报」→ `surgepix-generate-brand-placement` (text-to-image + 9-grid anchors). 「这张 KV 裁成小红书/Story/信息流尺寸」or「把这三张图裁剪成小红书竖版尺寸」→ `surgepix-channel-crop` (cover + center crop, no redraw). Do **not** use `surgepix-image-edit` or `surgepix-generate-poster` for those.
 
 ## Language consistency
 
@@ -58,7 +58,7 @@ The SurgePix Agent Skills give AI agents (Claude, Codex, Cursor, Gemini, OpenCla
 | 日本語 | Pass `--language jp` / `ja` | Write text params in Japanese |
 
 - **Do not default to Chinese on-image text** when the user prompts in English.
-- Applies to: `generate-illustrations`, `generate-xhs`, `generate-poster`, `generate-presentation`, `generate-logo` / `generate-storyboard` / `image-edit` / `generate-photo-poetic-editorial` / `generate-restaged-cinematic` / `generate-brand-placement` (prompt / fixed-text), `generate-channel-crop-pack` (placeholder prompt), `image-translate`, `ppt-translate` (`--language` = target).
+- Applies to: `generate-illustrations`, `generate-xhs`, `generate-poster`, `generate-presentation`, `generate-logo` / `generate-storyboard` / `image-edit` / `generate-photo-poetic-editorial` / `generate-restaged-cinematic` / `generate-brand-placement` (prompt / fixed-text), `channel-crop` (placeholder prompt), `image-translate`, `ppt-translate` (`--language` = target).
 
 > Most task-producing skills expose a `--nowait` flag. With `--nowait false` (default) the script returns the final `download` URL in one call (image-translate waits on the API; others poll internally). With `--nowait true` the API returns a `taskId` immediately, which you resolve via the `surgepix-query-task` skill.
 
@@ -179,7 +179,7 @@ node skills/surgepix-generate-brand-placement/scripts/generate_brand_placement.m
 Crop a finished KV into channel sizes:
 
 ```bash
-node skills/surgepix-generate-channel-crop-pack/scripts/generate_channel_crop_pack.mjs \
+node skills/surgepix-channel-crop/scripts/channel_crop.mjs \
   --reference ./campaign-kv.png \
   --size 1080x1920 --size 1080x1080 --size 1920x1080 \
   --prompt "产品和主标题尽量完整入画（本版不参与裁窗）"

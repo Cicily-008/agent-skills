@@ -8,7 +8,7 @@
  *   3. 根据 --nowait 决定是否本地轮询 GET /tasks/{taskId}
  *
  * 用法:
- *   node generate_channel_crop_pack.mjs --prompt <text>
+ *   node channel_crop.mjs --prompt <text>
  *     --reference <path-or-url> [--reference ...]
  *     --size <WxH> [--size ...]
  *     [--session-id <id>] [--nowait <true|false>]
@@ -199,7 +199,7 @@ function fail(message) {
 }
 
 function printHelp() {
-  console.error("Usage: node generate_channel_crop_pack.mjs --prompt <text> \\");
+  console.error("Usage: node channel_crop.mjs --prompt <text> \\");
   console.error("         --reference <path-or-url> [--reference ...] \\");
   console.error("         --size <WxH> [--size ...] \\");
   console.error("         [--session-id <id>] [--nowait <true|false>]");
