@@ -26,6 +26,8 @@ Match the **user's conversation language** for all text printed on the poster �
 
 - User says "生成海报", "做个海报", "generate poster", "make a poster", "create a poster"
 - User provides an event name, date, and venue, optionally with styling hints or reference images
+- Do **not** use for 品牌落位文生图 (logo / 固定文案九宫格) — use **surgepix-generate-brand-placement**
+- Do **not** use for 已定稿 KV 多渠道裁切 — use **surgepix-generate-channel-crop-pack**
 
 ## Prerequisites
 
