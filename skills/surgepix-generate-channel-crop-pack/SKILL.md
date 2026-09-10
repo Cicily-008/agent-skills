@@ -1,7 +1,7 @@
 ---
 name: surgepix-generate-channel-crop-pack
 description: >-
-  Cover-scale and center-crop a finished key visual into multiple channel sizes via SurgePix (no generative model). Use when the user says "渠道裁切", "渠道裁切包", "多尺寸裁切", "裁成小红书/Story/信息流尺寸", "channel crop pack", or wants one KV exported to several platform sizes. Output rule: show ONLY the download URL from script stdout verbatim in a code block; one size = image URL, multiple sizes = ZIP URL; NEVER fabricate per-size URLs. Do NOT use for generating a new scene (surgepix-generate-brand-placement / surgepix-generate-poster) or general 改图 (surgepix-image-edit).
+  Use when the user already has photo(s) and wants to 裁剪 / 裁切 / crop them to a platform size — including 「帮我把这三张图裁剪成小红书竖版尺寸」, 「把这几张图裁成小红书竖版」, 「裁成竖版尺寸」, 「改成小红书尺寸」, 「裁成Story/信息流/方图」, crop to Xiaohongshu/RED vertical size, 渠道裁切包, or exporting a finished KV. Works for 1–5 existing images and even a SINGLE size (not only multi-size packs). Prefer this over surgepix-generate-xhs whenever the job is crop/resize of existing photos (xhs GENERATES new 套图). Do NOT use for generating new posters/scenes or general 改图. Output: show ONLY the download URL from script stdout verbatim (one PNG or ZIP); NEVER fabricate per-image URLs.
 ---
 
 # SurgePix Generate Channel Crop Pack
@@ -24,17 +24,24 @@ Take a **finished** key visual (campaign KV / hero) and produce multiple platfor
 
 | Use this skill | Use something else |
 |----------------|-------------------|
-| 已定稿主视觉 → 多渠道尺寸 | **surgepix-generate-brand-placement** to **generate** a new branded scene |
-| 小红书 / Story / 信息流 / 横幅 裁切包 | **surgepix-generate-poster** to generate an event poster |
+| 「把这三张图**裁剪**成小红书竖版尺寸」 | **surgepix-generate-xhs** to **generate** a new 小红书套图 from copy |
+| 已有图 → 小红书竖版 / Story / 信息流 / 方图 尺寸 | **surgepix-generate-poster** to generate an event poster |
 | cover 缩放 + 中心裁切（不重生图） | **surgepix-image-edit** to redraw / restyle a photo |
+| 1–5 张现成图，哪怕只要 **一个** 尺寸 | **surgepix-generate-brand-placement** to generate a new branded scene |
 
 **Do NOT use this skill** to invent a new image, move a logo, or restyle a photo.
 
+**Do NOT send crop jobs to xhs.** 「小红书竖版」+ 已有图 + 裁剪/裁切/改尺寸 = this skill. 「做一套小红书笔记 / 竖版轮播」from 文案 = **surgepix-generate-xhs**.
+
 ## When to use
 
-- User says "渠道裁切", "渠道裁切包", "多尺寸裁切", "channel crop pack"
+- User says "裁剪成小红书竖版尺寸", "裁成小红书竖版", "裁成竖版尺寸", "改成小红书尺寸", "把这几张图裁一下"
+- User says "渠道裁切", "渠道裁切包", "多尺寸裁切", "channel crop pack", "crop to Xiaohongshu size"
+- User attaches 1–5 existing photos and names a channel size (小红书竖版 / Story / 信息流 / 方图 / 横幅) — **one size is enough**
 - User has a finished KV and wants 小红书封面 / Story / 信息流方图 / 横幅 / 头像 / 网页头图
 - User lists target `WxH` sizes (custom or from the channel table below)
+
+If the user says **小红书竖版** / **小红书竖版尺寸** without a pixel size, use `--size 1080x1440`.
 
 ## Prerequisites
 
@@ -86,6 +93,14 @@ node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_
 # `<DOWNLOAD_URL>` 仅为文档占位；真实 HTTPS 下载地址以脚本 stdout 为准。多尺寸结果为 ZIP。
 ```
 
+**Three existing photos → 小红书竖版 (1080x1440):**
+```bash
+node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_crop_pack.mjs" \
+  --reference ./a.png --reference ./b.png --reference ./c.png \
+  --size 1080x1440 \
+  --prompt "裁成小红书竖版尺寸（本版不参与裁窗）"
+```
+
 **Remote KV, Xiaohongshu cover + feed:**
 ```bash
 node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_crop_pack.mjs" \
@@ -124,7 +139,7 @@ node "<skills-dir>/surgepix-setup/scripts/check_env.mjs"
 - **Required:** `--prompt` (non-empty placeholder; **does not** move the crop)
 - **Optional:** `--session-id`, `--nowait`
 
-If the user names a channel but not pixels, map from the table below.
+If the user names a channel but not pixels, map from the table below. 「小红书竖版尺寸」without further detail → `1080x1440`.
 
 ### Step 2: Run
 
@@ -160,7 +175,7 @@ node "<skills-dir>/surgepix-generate-channel-crop-pack/scripts/generate_channel_
 
 | Channel | `--size` |
 |---------|----------|
-| 小红书封面 | `1080x1440` |
+| 小红书竖版 / 小红书封面（用户只说竖版尺寸时用这个） | `1080x1440` |
 | Story / 开屏 | `1080x1920` |
 | 信息流方图 | `1080x1080` |
 | 信息流竖图 | `1080x1350` |

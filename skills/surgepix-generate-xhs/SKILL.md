@@ -1,7 +1,7 @@
 ---
 name: surgepix-generate-xhs
 description: >-
-  Generate Xiaohongshu (RED) vertical carousel image sets (cover + content pages) via SurgePix. Use when the user wants 小红书套图, 小红书笔记图, 竖版轮播, RED post images, or mentions 小红书/RED/笔记. Language: always pass --language matching user (English→en, 中文→zh, 日本語→jp). Output rule: API returns only ONE download URL — single image = image URL; multiple images = ZIP URL (resultType zip). When ZIP, show ONLY that download link; NEVER fabricate per-image URLs. Do NOT use for 公众号/博客/推文横版配图 — use surgepix-generate-illustrations. If the user only says 配图 without platform, ask first.
+  Generate NEW Xiaohongshu (RED) vertical carousel image sets (cover + content pages) via SurgePix. Use when the user wants to 生成/做 小红书套图, 小红书笔记图, 竖版轮播, RED post images from copy. Do NOT use when the user already has photos and says 裁剪/裁切/crop them to 小红书竖版尺寸 — that is surgepix-generate-channel-crop-pack. Language: always pass --language matching user (English→en, 中文→zh, 日本語→jp). Output rule: API returns only ONE download URL — single image = image URL; multiple images = ZIP URL (resultType zip). When ZIP, show ONLY that download link; NEVER fabricate per-image URLs. Do NOT use for 公众号/博客/推文横版配图 — use surgepix-generate-illustrations. If the user only says 配图 without platform, ask first.
 ---
 
 # SurgePix Generate Xiaohongshu Images
@@ -24,24 +24,27 @@ Match the **user's conversation language** for on-image text and `--prompt` copy
 
 ## Skill router (read first)
 
-| Use this skill | Use **surgepix-generate-illustrations** instead |
-|----------------|--------------------------------------------------|
-| 小红书 / RED / 笔记 / 套图 / 竖版轮播 | 公众号 / 博客 / 推文 / 文章 |
-| Vertical carousel (cover + pages) | 16:9 horizontal article illustrations (1536×864) |
+| Use this skill | Use something else |
+|----------------|-------------------|
+| **生成** 小红书套图 / 笔记 / 竖版轮播（从文案出新图） | **surgepix-generate-illustrations** for 公众号 / 博客 / 推文 / 16:9 横版 |
+| Vertical carousel (cover + pages) from copy | **surgepix-generate-channel-crop-pack** when the user already has photos and wants to **裁剪/裁切** them to 小红书竖版尺寸 |
 | Social post image set, up to 16 images | Editorial hand-drawn illustrations, up to 9 images |
 
 **Do NOT use this skill when:**
 - User wants 公众号配图, 博客插图, 推文配图, or 横版/16:9 文章插图
 - User did not mention 小红书/RED/笔记/竖版, and the content is for a blog or WeChat article
+- User already has images and says「帮我把这三张图裁剪成小红书竖版尺寸」/「裁成小红书竖版」— use **surgepix-generate-channel-crop-pack** (crop, do not regenerate)
 
 **Ambiguous input:** If the user only says「配图」「做几张图」without platform or aspect ratio, ask:
 > 是要 **小红书竖版套图**（笔记轮播），还是 **公众号/博客横版插图**（16:9）？
 
+If they attach photos and say 裁剪/改尺寸, do **not** ask that question — use **surgepix-generate-channel-crop-pack**.
+
 ## When to use
 
 - User says "生成小红书套图", "做小红书图", "小红书笔记图", "generate xiaohongshu images", "make RED post images"
-- User explicitly mentions 小红书, RED, 笔记, 竖版轮播, or vertical carousel for social posts
-- User provides per-page copy and wants cover + content images in Xiaohongshu style
+- User wants to **create** cover + content pages in Xiaohongshu style from per-page copy
+- User explicitly mentions 小红书, RED, 笔记, 竖版轮播, or vertical carousel for **new** social posts — and is **not** asking to crop existing photos
 
 ## Prerequisites
 

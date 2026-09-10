@@ -33,6 +33,7 @@ Match the **user's conversation language** for on-image handwritten labels and a
 **Do NOT use this skill when:**
 - User wants 小红书套图, 小红书笔记图, 竖版轮播, or RED post images
 - User explicitly mentions 小红书, RED, 笔记, or vertical social carousel
+- User already has photos and wants to 裁剪/裁切 them to 小红书竖版尺寸 — use **surgepix-generate-channel-crop-pack**
 
 **Ambiguous input:** If the user only says「配图」「做几张图」without platform or aspect ratio, ask:
 > 是要 **小红书竖版套图**（笔记轮播），还是 **公众号/博客横版插图**（16:9）？
