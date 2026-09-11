@@ -1,7 +1,7 @@
 ---
 name: surgepix-generate-logo
 description: >-
-  Generate a brand logo (PNG, transparent by default) via SurgePix API and return a download URL. Use when the user says "generate logo", "生成logo", "做个标志", "品牌logo", "transparent logo", or wants a logo from a brand/product name. Language: write --prompt in the user's conversation language. Output rule: show ONLY the download URL from the API; NEVER fabricate image links.
+  Generate a brand logo (PNG, transparent by default) via SurgePix API and return a download URL. Use when the user says "generate logo", "生成logo", "做个标志", "品牌logo", "transparent logo", or wants a logo from a brand/product name. Do NOT use when the user already has a logo and wants to 叠加/贴 it onto artwork (surgepix-add-logo) or stamp a full-bleed watermark (surgepix-add-watermark). Language: write --prompt in the user's conversation language. Output rule: show ONLY the download URL from the API; NEVER fabricate image links.
 ---
 
 # SurgePix Generate Logo
@@ -24,6 +24,8 @@ Match the **user's conversation language** for `--prompt` design notes — unles
 
 - User says "生成logo", "做个标志", "generate logo", "brand logo", "透明底 logo"
 - User provides a brand/product name and optional style notes or reference images
+- Do **not** use to overlay an existing logo on finished artwork — that is **surgepix-add-logo**
+- Do **not** use to stamp a full-bleed watermark — that is **surgepix-add-watermark**
 
 ## Prerequisites
 

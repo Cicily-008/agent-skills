@@ -29,7 +29,9 @@ The SurgePix Agent Skills give AI agents (Claude, Codex, Cursor, Gemini, OpenCla
 | `surgepix-generate-poster` | "generate poster", "生成海报" | Generate event poster → PNG |
 | `surgepix-generate-presentation` | "generate ppt", "生成PPT" | Generate presentation → PPTX |
 | `surgepix-generate-logo` | "generate logo", "生成logo", "品牌logo" | Brand logo → PNG (transparent by default) |
-| `surgepix-generate-brand-placement` | "品牌落位", "logo落位", "固定文案落位", "brand placement" | New scene + Logo / locked copy on a 9-grid → PNG/ZIP |
+| `surgepix-generate-brand-placement` | "品牌落位", "logo落位", "固定文案落位", "brand placement" (NOT 已有图贴logo) | New scene + Logo / locked copy on a 9-grid → PNG/ZIP |
+| `surgepix-add-logo` | "素材叠加logo", "叠加logo", "贴logo", "overlay logo", "add logo to this image" | Existing PNG + logo → 9-grid overlay (PNG/ZIP; never Pillow) |
+| `surgepix-add-watermark` | "素材叠加全幅水印", "叠加水印", "加水印", "全幅水印", "overlay watermark" | Existing PNG + watermark → contain + center (PNG/ZIP; never Pillow) |
 | `surgepix-channel-crop` | "crop this image to Xiaohongshu", "截成小红书尺寸", "裁剪成小红书竖版尺寸", "Little Red Book", "渠道裁切" | Existing photos → cover + center-crop (PNG/ZIP; never bash/Pillow) |
 | `surgepix-generate-storyboard` | "分镜头", "故事板", "storyboard", "分镜剧本" | Multi-shot storyboard → single PNG |
 | `surgepix-image-edit` | "图片编辑", "改图", "重绘" (NOT 超现实主义风格 / 极简诗意风格) | General edit from references + prompt → PNG |
@@ -45,7 +47,7 @@ The SurgePix Agent Skills give AI agents (Claude, Codex, Cursor, Gemini, OpenCla
 >
 > **Photo → illustration:** 「帮我把这张图改成超现实主义风格」→ `surgepix-generate-restaged-cinematic` (conceptual restage: metaphor + color-field set + surreal device — **not** flatten the backdrop). 「改成极简诗意风格」/「极简线条」/「视觉记忆面板」→ `surgepix-generate-photo-poetic-editorial` (**ivory abstract panel only** — **not** a photo-plus-panel diptych, **not** a full-frame restyle). If the user only says「把这张照片做成插画」without style, ask.
 >
-> **Brand placement vs crop pack:** 「把 logo 放到右上角、生成新海报」→ `surgepix-generate-brand-placement` (text-to-image + 9-grid anchors). 「这张 KV 裁成小红书/Story/信息流尺寸」or「把这三张图裁剪成小红书竖版尺寸」→ `surgepix-channel-crop` (cover + center crop, no redraw). Do **not** use `surgepix-image-edit` or `surgepix-generate-poster` for those.
+> **Brand placement vs overlay vs crop:** 「把 logo 放到右上角、生成新海报」→ `surgepix-generate-brand-placement` (text-to-image + 9-grid anchors). 「这张已有图 + logo 贴到右上角」→ `surgepix-add-logo` (pixel overlay, no redraw). 「这张图加全幅水印」→ `surgepix-add-watermark` (contain + center). 「这张 KV 裁成小红书/Story/信息流尺寸」or「把这三张图裁剪成小红书竖版尺寸」→ `surgepix-channel-crop` (cover + center crop, no redraw). Do **not** use Pillow / ImageMagick, and do **not** use `surgepix-image-edit` or `surgepix-generate-poster` for those.
 
 ## Language consistency
 
@@ -58,7 +60,7 @@ The SurgePix Agent Skills give AI agents (Claude, Codex, Cursor, Gemini, OpenCla
 | 日本語 | Pass `--language jp` / `ja` | Write text params in Japanese |
 
 - **Do not default to Chinese on-image text** when the user prompts in English.
-- Applies to: `generate-illustrations`, `generate-xhs`, `generate-poster`, `generate-presentation`, `generate-logo` / `generate-storyboard` / `image-edit` / `generate-photo-poetic-editorial` / `generate-restaged-cinematic` / `generate-brand-placement` (prompt / fixed-text), `channel-crop` (placeholder prompt), `image-translate`, `ppt-translate` (`--language` = target).
+- Applies to: `generate-illustrations`, `generate-xhs`, `generate-poster`, `generate-presentation`, `generate-logo` / `generate-storyboard` / `image-edit` / `generate-photo-poetic-editorial` / `generate-restaged-cinematic` / `generate-brand-placement` (prompt / fixed-text), `channel-crop` (placeholder prompt), `add-logo` / `add-watermark` (reply language only), `image-translate`, `ppt-translate` (`--language` = target).
 
 > Most task-producing skills expose a `--nowait` flag. With `--nowait false` (default) the script returns the final `download` URL in one call (image-translate waits on the API; others poll internally). With `--nowait true` the API returns a `taskId` immediately, which you resolve via the `surgepix-query-task` skill.
 
@@ -174,6 +176,25 @@ node skills/surgepix-generate-brand-placement/scripts/generate_brand_placement.m
   --logo-anchor top-right \
   --text-anchor bottom-left \
   --size 1080x1350
+```
+
+Overlay a logo on finished artwork:
+
+```bash
+node skills/surgepix-add-logo/scripts/add_logo.mjs \
+  --image ./poster.png \
+  --logo ./brand-logo.png \
+  --logo-size 12% \
+  --logo-anchor top-right
+```
+
+Overlay a full-bleed watermark:
+
+```bash
+node skills/surgepix-add-watermark/scripts/add_watermark.mjs \
+  --image ./poster.png \
+  --watermark ./wm.png \
+  --opacity 0.25
 ```
 
 Crop a finished KV into channel sizes:

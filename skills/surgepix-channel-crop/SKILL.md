@@ -44,6 +44,8 @@ Default size for 小红书 / Xiaohongshu / Little Red Book / 3:4: **`1080x1440`*
 | 已有图 → 小红书竖版 / Story / 信息流 / 方图 尺寸 | **surgepix-generate-poster** to generate an event poster |
 | cover 缩放 + 中心裁切（不重生图） | **surgepix-image-edit** to redraw / restyle a photo |
 | 1–5 张现成图，哪怕只要 **一个** 尺寸 | **surgepix-generate-brand-placement** to generate a new branded scene |
+| | **surgepix-add-logo** to overlay a logo on finished artwork |
+| | **surgepix-add-watermark** to overlay a full-bleed watermark |
 
 **Do NOT use this skill** to invent a new image, move a logo, or restyle a photo.
 

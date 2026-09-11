@@ -1,7 +1,7 @@
 ---
 name: surgepix-image-edit
 description: >-
-  Edit images from reference image(s) and a natural-language prompt via SurgePix. Do NOT use when the user wants 超现实主义风格 / 超现实主义 / surrealism / 改成超现实 (use surgepix-generate-restaged-cinematic), 极简诗意风格 / 诗意风格 / 改成极简诗意 (use surgepix-generate-photo-poetic-editorial), 品牌落位 / logo落位 (use surgepix-generate-brand-placement), or 裁剪/裁切成小红书竖版尺寸 / 渠道裁切 / 改成竖版尺寸 (use surgepix-channel-crop). Use when the user says "图片编辑", "改图", "重绘", "image edit", "edit this image", "把图里的…改成…", or wants general image editing from references — but "改成" plus 超现实/诗意 is a locked-style restyle, not this skill. Language: write --prompt in the user's conversation language. Output rule: show ONLY the download URL from script stdout verbatim in a code block; NEVER fabricate or retype URLs. Local reference paths are uploaded first — API accepts URLs only.
+  Edit images from reference image(s) and a natural-language prompt via SurgePix. Do NOT use when the user wants 超现实主义风格 / 超现实主义 / surrealism / 改成超现实 (use surgepix-generate-restaged-cinematic), 极简诗意风格 / 诗意风格 / 改成极简诗意 (use surgepix-generate-photo-poetic-editorial), 品牌落位 / logo落位 on a NEW scene (use surgepix-generate-brand-placement), 已有图叠加/贴 logo (use surgepix-add-logo), 全幅水印 (use surgepix-add-watermark), or 裁剪/裁切成小红书竖版尺寸 / 渠道裁切 / 改成竖版尺寸 (use surgepix-channel-crop). Use when the user says "图片编辑", "改图", "重绘", "image edit", "edit this image", "把图里的…改成…", or wants general image editing from references — but "改成" plus 超现实/诗意 is a locked-style restyle, not this skill. Language: write --prompt in the user's conversation language. Output rule: show ONLY the download URL from script stdout verbatim in a code block; NEVER fabricate or retype URLs. Local reference paths are uploaded first — API accepts URLs only.
 ---
 
 # SurgePix Image Edit
@@ -27,9 +27,11 @@ Match the **user's conversation language** for `--prompt` — unless the user ex
 | General 改图 / 重绘 / 局部调整 **without** a locked style | **surgepix-generate-restaged-cinematic** for 超现实主义风格 / surrealism / 改成超现实 |
 | "把图里的天空改成黄昏" and similar object-level edits | **surgepix-generate-photo-poetic-editorial** for 极简诗意风格 / 改成极简诗意 |
 | | **surgepix-generate-brand-placement** for 新场景 + Logo/固定文案九宫格落位 |
+| | **surgepix-add-logo** for 已有底图叠加 Logo（角落 / 九宫格） |
+| | **surgepix-add-watermark** for 已有底图叠加全幅水印 |
 | | **surgepix-channel-crop** for 「把这三张图裁剪成小红书竖版尺寸」/ 已有图改渠道尺寸 |
 
-**Do NOT use this skill** when the user says「帮我把这张图改成超现实主义风格」or「改成极简诗意风格」— those are locked-style restyles. Do **not** use it for 品牌落位文生图, or for 裁剪/裁切成小红书竖版尺寸 / 渠道裁切包.
+**Do NOT use this skill** when the user says「帮我把这张图改成超现实主义风格」or「改成极简诗意风格」— those are locked-style restyles. Do **not** use it for 品牌落位文生图, 素材叠加 logo / 全幅水印, or for 裁剪/裁切成小红书竖版尺寸 / 渠道裁切包.
 
 ## When to use
 
