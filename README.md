@@ -34,10 +34,10 @@ The SurgePix Agent Skills give AI agents (Claude, Codex, Cursor, Gemini, OpenCla
 | `surgepix-generate-poster` | "generate poster", "生成海报" | Generate event poster → PNG | [Try →](https://surgepix.ai/skills/generate-event-poster) |
 | `surgepix-generate-presentation` | "generate ppt", "生成PPT" | Generate presentation → PPTX | [Try →](https://surgepix.ai/skills/generate-presentation) |
 | `surgepix-generate-logo` | "generate logo", "生成logo", "品牌logo" | Brand logo → PNG (transparent by default) | [Try →](https://surgepix.ai/skills/generate-brand-logo) |
-| `surgepix-generate-storyboard` | "分镜头", "故事板", "storyboard", "分镜剧本" | Multi-shot storyboard → single PNG | _soon_ |
-| `surgepix-image-edit` | "图片编辑", "改图", "重绘" (NOT 超现实主义风格 / 极简诗意风格) | General edit from references + prompt → PNG | _soon_ |
-| `surgepix-generate-photo-poetic-editorial` | "极简诗意风格", "极简线条", "视觉记忆面板", "改成极简诗意", "poetic editorial" | Photo reference → **ivory abstract panel only** (no source photo in the output) PNG | — |
-| `surgepix-generate-restaged-cinematic` | "超现实主义风格", "改成超现实", "surrealism", "超现实重构电影化插图" | Photo → locked **conceptual cinematic restage** (not flattened photo) PNG | — |
+| `surgepix-generate-storyboard` | "分镜头", "故事板", "storyboard", "分镜剧本" | Multi-shot storyboard → single PNG | [Try →](https://surgepix.ai/skills/generate-film-storyboards) |
+| `surgepix-image-edit` | "图片编辑", "改图", "重绘" (NOT 超现实主义风格 / 极简诗意风格) | General edit from references + prompt → PNG | [Try →](https://surgepix.ai/skills/image-Editing) |
+| `surgepix-generate-photo-poetic-editorial` | "极简诗意风格", "极简线条", "视觉记忆面板", "改成极简诗意", "poetic editorial" | Photo reference → **ivory abstract panel only** (no source photo in the output) PNG | [Try →](https://surgepix.ai/skills/generate-photo-poetic) |
+| `surgepix-generate-restaged-cinematic` | "超现实主义风格", "改成超现实", "surrealism", "超现实重构电影化插图" | Photo → locked **conceptual cinematic restage** (not flattened photo) PNG | [Try →](https://surgepix.ai/skills/generate-restaged-cinematic) |
 | `surgepix-generate-xhs` | "小红书套图", "小红书笔记图", "竖版轮播" (NOT generic「配图」) | Xiaohongshu **vertical** carousel → PNG/ZIP | [Try →](https://surgepix.ai/skills/generate-xhs) |
 | `surgepix-generate-illustrations` | "文章配图", "公众号配图", "博客插图" (NOT 小红书/竖版) | **16:9 horizontal** article illustrations → PNG/ZIP | [Try →](https://surgepix.ai/skills/generate-illustrations) |
 | `surgepix-image-translate` | "translate image", "图片翻译", "翻译图片" | Translate on-image text → image or ZIP | [Try →](https://surgepix.ai/skills/image-translate) |
