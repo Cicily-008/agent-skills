@@ -6,8 +6,8 @@ This repository contains the official SurgePix Agent Skills for AI coding enviro
 
 **Prefer a UI?** Every skill also runs in your browser — no setup — at **[surgepix.ai/skills](https://surgepix.ai/skills)**. Building an agent? See **[surgepix.ai/for-agents](https://surgepix.ai/for-agents)**.
 
-<!-- TODO(maintainer): drop an example strip at .github/assets/examples.png — 4–6 real outputs (cutout · AI slide · translated image · inpaint before/after), ~1200px wide, optimized < 150 KB. Then delete this comment. -->
-![Example outputs from SurgePix agent skills — background removal, AI slides, image translation, and inpainting](.github/assets/examples.png)
+<!-- Illustrative capabilities banner (.github/assets/examples.svg). Swap for real product screenshots when ready. -->
+![What SurgePix agent skills produce — background removal, AI presentations, image translation, inpainting, and Xiaohongshu carousels](.github/assets/examples.svg)
 
 ## What Is SurgePix?
 
