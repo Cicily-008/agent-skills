@@ -15,34 +15,34 @@ This repository contains the official SurgePix Agent Skills for AI coding enviro
 <table>
   <tr>
     <td width="33%" align="center" valign="top">
-      <img src=".github/assets/ex-remove-background.png" width="240" alt="Background removal — subject on a transparent checkerboard"><br>
+      <img src=".github/assets/ex-remove-background.jpg" width="240" alt="Background removal — subject on a transparent checkerboard"><br>
       <b>Background Remover</b><br>
       <sub><code>photo.jpg</code> → clean transparent PNG, hair kept</sub>
     </td>
     <td width="33%" align="center" valign="top">
-      <img src=".github/assets/ex-presentation.png" width="240" alt="Generated, editable presentation deck"><br>
+      <img src=".github/assets/ex-presentation.jpg" width="240" alt="Generated, editable presentation deck"><br>
       <b>Presentation</b><br>
       <sub><code>"Q3 roadmap, 10 slides"</code> → editable <code>.pptx</code></sub>
     </td>
     <td width="33%" align="center" valign="top">
-      <img src=".github/assets/ex-image-translate.png" width="240" alt="An image with its text translated in place"><br>
+      <img src=".github/assets/ex-image-translate.jpg" width="240" alt="An image with its text translated in place"><br>
       <b>Image Translator</b><br>
       <sub><code>menu.jpg --language en</code> → text translated in place</sub>
     </td>
   </tr>
   <tr>
     <td align="center" valign="top">
-      <img src=".github/assets/ex-inpaint.png" width="240" alt="Inpainting — one region changed, the rest identical"><br>
+      <img src=".github/assets/ex-inpaint.jpg" width="240" alt="Inpainting — one region changed, the rest identical"><br>
       <b>AI Inpainting</b><br>
       <sub><code>--prompt "remove the boat"</code> → only that region changes</sub>
     </td>
     <td align="center" valign="top">
-      <img src=".github/assets/ex-xhs.png" width="240" alt="Xiaohongshu vertical carousel set"><br>
+      <img src=".github/assets/ex-xhs.jpg" width="240" alt="Xiaohongshu vertical carousel set"><br>
       <b>Xiaohongshu Carousel</b><br>
       <sub><code>"5 budget skincare picks"</code> → cover + content set</sub>
     </td>
     <td align="center" valign="top">
-      <img src=".github/assets/ex-poster.png" width="240" alt="Generated event poster"><br>
+      <img src=".github/assets/ex-poster.jpg" width="240" alt="Generated event poster"><br>
       <b>Event Poster</b><br>
       <sub>name + date + venue → finished poster PNG</sub>
     </td>
