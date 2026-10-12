@@ -9,6 +9,48 @@ This repository contains the official SurgePix Agent Skills for AI coding enviro
 <!-- Illustrative capabilities banner (.github/assets/examples.svg). Swap for real product screenshots when ready. -->
 ![What SurgePix agent skills produce — background removal, AI presentations, image translation, inpainting, and Xiaohongshu carousels](.github/assets/examples.svg)
 
+## Examples — what each skill makes
+
+<!-- TODO(maintainer): drop real output screenshots at the 6 .github/assets/ex-*.png paths below (specs in the PR description). Until then these render as broken images. -->
+<table>
+  <tr>
+    <td width="33%" align="center" valign="top">
+      <img src=".github/assets/ex-remove-background.png" width="240" alt="Background removal — subject on a transparent checkerboard"><br>
+      <b>Background Remover</b><br>
+      <sub><code>photo.jpg</code> → clean transparent PNG, hair kept</sub>
+    </td>
+    <td width="33%" align="center" valign="top">
+      <img src=".github/assets/ex-presentation.png" width="240" alt="Generated, editable presentation deck"><br>
+      <b>Presentation</b><br>
+      <sub><code>"Q3 roadmap, 10 slides"</code> → editable <code>.pptx</code></sub>
+    </td>
+    <td width="33%" align="center" valign="top">
+      <img src=".github/assets/ex-image-translate.png" width="240" alt="An image with its text translated in place"><br>
+      <b>Image Translator</b><br>
+      <sub><code>menu.jpg --language en</code> → text translated in place</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+      <img src=".github/assets/ex-inpaint.png" width="240" alt="Inpainting — one region changed, the rest identical"><br>
+      <b>AI Inpainting</b><br>
+      <sub><code>--prompt "remove the boat"</code> → only that region changes</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src=".github/assets/ex-xhs.png" width="240" alt="Xiaohongshu vertical carousel set"><br>
+      <b>Xiaohongshu Carousel</b><br>
+      <sub><code>"5 budget skincare picks"</code> → cover + content set</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src=".github/assets/ex-poster.png" width="240" alt="Generated event poster"><br>
+      <b>Event Poster</b><br>
+      <sub>name + date + venue → finished poster PNG</sub>
+    </td>
+  </tr>
+</table>
+
+Every skill also runs in your browser at **[surgepix.ai/skills](https://surgepix.ai/skills)** — full list in the [skills table](#what-the-skills-do) below.
+
 ## What Is SurgePix?
 
 SurgePix provides an AI image processing API and a set of developer-facing agent skills that let autonomous agents and human developers process images programmatically.
