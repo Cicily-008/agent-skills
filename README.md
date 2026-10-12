@@ -4,6 +4,53 @@ SurgePix is an AI image processing platform that lets you remove backgrounds, up
 
 This repository contains the official SurgePix Agent Skills for AI coding environments and agentic platforms. Works with Claude Code, Codex CLI, Cursor, Gemini CLI, OpenClaw, and any agent supporting the [SKILL.md](https://agentskills.io) standard.
 
+**Prefer a UI?** Every skill also runs in your browser — no setup — at **[surgepix.ai/skills](https://surgepix.ai/skills)**. Building an agent? See **[surgepix.ai/for-agents](https://surgepix.ai/for-agents)**.
+
+<!-- Illustrative capabilities banner (.github/assets/examples.svg). Swap for real product screenshots when ready. -->
+![What SurgePix agent skills produce — background removal, AI presentations, image translation, inpainting, and Xiaohongshu carousels](.github/assets/examples.svg)
+
+## Examples — what each skill makes
+
+<!-- TODO(maintainer): drop real output screenshots at the 6 .github/assets/ex-*.png paths below (specs in the PR description). Until then these render as broken images. -->
+<table>
+  <tr>
+    <td width="33%" align="center" valign="top">
+      <img src=".github/assets/ex-remove-background.png" width="240" alt="Background removal — subject on a transparent checkerboard"><br>
+      <b>Background Remover</b><br>
+      <sub><code>photo.jpg</code> → clean transparent PNG, hair kept</sub>
+    </td>
+    <td width="33%" align="center" valign="top">
+      <img src=".github/assets/ex-presentation.png" width="240" alt="Generated, editable presentation deck"><br>
+      <b>Presentation</b><br>
+      <sub><code>"Q3 roadmap, 10 slides"</code> → editable <code>.pptx</code></sub>
+    </td>
+    <td width="33%" align="center" valign="top">
+      <img src=".github/assets/ex-image-translate.png" width="240" alt="An image with its text translated in place"><br>
+      <b>Image Translator</b><br>
+      <sub><code>menu.jpg --language en</code> → text translated in place</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+      <img src=".github/assets/ex-inpaint.png" width="240" alt="Inpainting — one region changed, the rest identical"><br>
+      <b>AI Inpainting</b><br>
+      <sub><code>--prompt "remove the boat"</code> → only that region changes</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src=".github/assets/ex-xhs.png" width="240" alt="Xiaohongshu vertical carousel set"><br>
+      <b>Xiaohongshu Carousel</b><br>
+      <sub><code>"5 budget skincare picks"</code> → cover + content set</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src=".github/assets/ex-poster.png" width="240" alt="Generated event poster"><br>
+      <b>Event Poster</b><br>
+      <sub>name + date + venue → finished poster PNG</sub>
+    </td>
+  </tr>
+</table>
+
+Every skill also runs in your browser at **[surgepix.ai/skills](https://surgepix.ai/skills)** — full list in the [skills table](#what-the-skills-do) below.
+
 ## What Is SurgePix?
 
 SurgePix provides an AI image processing API and a set of developer-facing agent skills that let autonomous agents and human developers process images programmatically.
@@ -21,23 +68,23 @@ The SurgePix Agent Skills give AI agents (Claude, Codex, Cursor, Gemini, OpenCla
 
 ### What the Skills Do
 
-| Skill | Triggers | Description |
-|-------|----------|-------------|
-| `surgepix-setup` | "setup surgepix", first use | Check & configure environment |
-| `surgepix-upload` | "upload", "get URL", "上传文件" | Upload local file → public HTTPS URL |
-| `surgepix-remove-background` | "remove background", "抠图", "去背景" | Remove background → transparent PNG |
-| `surgepix-generate-poster` | "generate poster", "生成海报" | Generate event poster → PNG |
-| `surgepix-generate-presentation` | "generate ppt", "生成PPT" | Generate presentation → PPTX |
-| `surgepix-generate-logo` | "generate logo", "生成logo", "品牌logo" | Brand logo → PNG (transparent by default) |
-| `surgepix-generate-storyboard` | "分镜头", "故事板", "storyboard", "分镜剧本" | Multi-shot storyboard → single PNG |
-| `surgepix-image-edit` | "图片编辑", "改图", "重绘" (NOT 超现实主义风格 / 极简诗意风格) | General edit from references + prompt → PNG |
-| `surgepix-generate-photo-poetic-editorial` | "极简诗意风格", "极简线条", "视觉记忆面板", "改成极简诗意", "poetic editorial" | Photo reference → **ivory abstract panel only** (no source photo in the output) PNG |
-| `surgepix-generate-restaged-cinematic` | "超现实主义风格", "改成超现实", "surrealism", "超现实重构电影化插图" | Photo → locked **conceptual cinematic restage** (not flattened photo) PNG |
-| `surgepix-generate-xhs` | "小红书套图", "小红书笔记图", "竖版轮播" (NOT generic「配图」) | Xiaohongshu **vertical** carousel → PNG/ZIP |
-| `surgepix-generate-illustrations` | "文章配图", "公众号配图", "博客插图" (NOT 小红书/竖版) | **16:9 horizontal** article illustrations → PNG/ZIP |
-| `surgepix-image-translate` | "translate image", "图片翻译", "翻译图片" | Translate on-image text → image or ZIP |
-| `surgepix-ppt-translate` | "translate ppt", "翻译PPT", "PPT翻译" | Translate PPT/PPTX → translated file URL |
-| `surgepix-query-task` | "check task", "poll task", "查任务" | Query/poll async task status |
+| Skill | Triggers | Description | Web version |
+|-------|----------|-------------|-------------|
+| `surgepix-setup` | "setup surgepix", first use | Check & configure environment | — |
+| `surgepix-upload` | "upload", "get URL", "上传文件" | Upload local file → public HTTPS URL | — |
+| `surgepix-remove-background` | "remove background", "抠图", "去背景" | Remove background → transparent PNG | [Try →](https://surgepix.ai/skills/remove-background) |
+| `surgepix-generate-poster` | "generate poster", "生成海报" | Generate event poster → PNG | [Try →](https://surgepix.ai/skills/generate-event-poster) |
+| `surgepix-generate-presentation` | "generate ppt", "生成PPT" | Generate presentation → PPTX | [Try →](https://surgepix.ai/skills/generate-presentation) |
+| `surgepix-generate-logo` | "generate logo", "生成logo", "品牌logo" | Brand logo → PNG (transparent by default) | [Try →](https://surgepix.ai/skills/generate-brand-logo) |
+| `surgepix-generate-storyboard` | "分镜头", "故事板", "storyboard", "分镜剧本" | Multi-shot storyboard → single PNG | [Try →](https://surgepix.ai/skills/generate-film-storyboards) |
+| `surgepix-image-edit` | "图片编辑", "改图", "重绘" (NOT 超现实主义风格 / 极简诗意风格) | General edit from references + prompt → PNG | [Try →](https://surgepix.ai/skills/image-Editing) |
+| `surgepix-generate-photo-poetic-editorial` | "极简诗意风格", "极简线条", "视觉记忆面板", "改成极简诗意", "poetic editorial" | Photo reference → **ivory abstract panel only** (no source photo in the output) PNG | [Try →](https://surgepix.ai/skills/generate-photo-poetic) |
+| `surgepix-generate-restaged-cinematic` | "超现实主义风格", "改成超现实", "surrealism", "超现实重构电影化插图" | Photo → locked **conceptual cinematic restage** (not flattened photo) PNG | [Try →](https://surgepix.ai/skills/generate-restaged-cinematic) |
+| `surgepix-generate-xhs` | "小红书套图", "小红书笔记图", "竖版轮播" (NOT generic「配图」) | Xiaohongshu **vertical** carousel → PNG/ZIP | [Try →](https://surgepix.ai/skills/generate-xhs) |
+| `surgepix-generate-illustrations` | "文章配图", "公众号配图", "博客插图" (NOT 小红书/竖版) | **16:9 horizontal** article illustrations → PNG/ZIP | [Try →](https://surgepix.ai/skills/generate-illustrations) |
+| `surgepix-image-translate` | "translate image", "图片翻译", "翻译图片" | Translate on-image text → image or ZIP | [Try →](https://surgepix.ai/skills/image-translate) |
+| `surgepix-ppt-translate` | "translate ppt", "翻译PPT", "PPT翻译" | Translate PPT/PPTX → translated file URL | [Try →](https://surgepix.ai/skills/ppt-translator) |
+| `surgepix-query-task` | "check task", "poll task", "查任务" | Query/poll async task status | — |
 
 > **xhs vs illustrations:** If the user only says「配图」, ask whether they need 小红书竖版套图 or 公众号/博客横版插图 before picking a skill.
 >
