@@ -11,7 +11,8 @@ This repository contains the official SurgePix Agent Skills for AI coding enviro
 
 ## Examples — what each skill makes
 
-<!-- TODO(maintainer): drop real output screenshots at the 6 .github/assets/ex-*.png paths below (specs in the PR description). Until then these render as broken images. -->
+Each of these was produced with a **single short skill call** — no giant prompt. The style, layout, and polish live inside the skill; your agent just says what it wants and gets a finished file back. The captions show the gist of each call.
+
 <table>
   <tr>
     <td width="33%" align="center" valign="top">
@@ -45,6 +46,40 @@ This repository contains the official SurgePix Agent Skills for AI coding enviro
       <img src=".github/assets/ex-poster.jpg" width="240" alt="Generated event poster"><br>
       <b>Poster</b><br>
       <sub><code>"artisan bakery promo"</code> → finished poster PNG</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+      <img src=".github/assets/ex-logo.jpg" width="240" alt="A grid of generated logo concepts"><br>
+      <b>Logo</b><br>
+      <sub><code>"brand name + vibe"</code> → logo concepts</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src=".github/assets/ex-illustrations.jpg" width="240" alt="A 16:9 watercolor article illustration"><br>
+      <b>Article Illustration</b><br>
+      <sub><code>"article on AI slides"</code> → 16:9 editorial illustration</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src=".github/assets/ex-storyboard.jpg" width="240" alt="An 8-panel pencil storyboard"><br>
+      <b>Storyboard</b><br>
+      <sub><code>"a train-platform goodbye"</code> → 8-shot storyboard</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+      <img src=".github/assets/ex-poetic.jpg" width="240" alt="A photo restyled into a minimalist poetic editorial panel"><br>
+      <b>Poetic Editorial</b><br>
+      <sub><code>photo</code> → minimalist ivory panel</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src=".github/assets/ex-cinematic.jpg" width="240" alt="A photo restaged into a surreal cinematic scene"><br>
+      <b>Cinematic Restage</b><br>
+      <sub><code>photo</code> → surreal color-field restage</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src=".github/assets/ex-ppt-translate.jpg" width="240" alt="A deck translated from English to Spanish, layout kept"><br>
+      <b>PPT Translator</b><br>
+      <sub><code>deck.pptx --language es</code> → translated, layout kept</sub>
     </td>
   </tr>
 </table>
